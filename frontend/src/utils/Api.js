@@ -108,7 +108,7 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: "https://mesto.rus.nomoredomains.monster/",
+  baseUrl: "https://api.mesto.rus.nomoredomains.monster/",
   headers: {
     "Content-Type": "application/json",
   },
@@ -117,7 +117,7 @@ export const api = new Api({
 export default api;
 
 export const auth = new Api({
-  baseUrl: "https://mesto.rus.nomoredomains.monster/",
+  baseUrl: "https://api.mesto.rus.nomoredomains.monster/",
   headers: {
     "Content-Type": "application/json",
   },
