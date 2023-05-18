@@ -1,6 +1,4 @@
 const express = require('express');
-
-const { PORT = 3000 } = process.env;
 const app = express();
 
 const bodyParser = require('body-parser');
@@ -12,7 +10,7 @@ const { PORT, MONGOOSE_URL } = require('./tokenValue');
 const { NOT_FOUND_ERROR } = require('./errors/notFoundError');
 const { login, createUser } = require('./controllers/user');
 const { auth } = require('./middlewares/auth');
-const { cors } = require('./moddlewares/cors.js');
+const { cors } = require('./middlewares/cors');
 const router = require('./routes/index');
 
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -21,7 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
 
-app.use(cors);
+app.use( cors);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
