@@ -1,0 +1,15 @@
+.infoTooltip__close {
+  background: url(../../../images/CloseIcon.svg);
+  width: 32px;
+  height: 32px;
+  position: absolute;
+  padding: 0;
+  top: -40px;
+  right: -40px;
+  border: none;
+  cursor: pointer;
+}
+
+.popup__close:hover {
+  opacity: 0.8;
+}

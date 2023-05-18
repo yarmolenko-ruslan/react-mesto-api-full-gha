@@ -1,0 +1,13 @@
+.infoTooltip__container {
+  width: 430px;
+  height: 330px;
+  background-color: #FFFFFF;
+  color: #000000;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+}

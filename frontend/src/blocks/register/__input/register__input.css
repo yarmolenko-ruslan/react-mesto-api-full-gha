@@ -1,0 +1,15 @@
+.register__input {
+  width: 358px;
+  border: none;
+  border-bottom: 2px solid #CCCCCC;
+  background-color: transparent;
+  margin-top: 30px;
+  line-height: 17px;
+  height: 27px;
+  font-size: 14px;
+  color: #CCCCCC;
+}
+
+.register__input:first-child {
+  margin-top: 0px;
+}

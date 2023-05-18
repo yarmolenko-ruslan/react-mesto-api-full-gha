@@ -1,0 +1,16 @@
+.profile__info-button {
+  border: 1px solid #fff;
+  width: 24px;
+  height: 24px;
+  background-image: url(../../../images/pencil.svg);
+  grid-area: button;
+  margin: 15px 0 0 19px;
+}
+
+@media (max-width: 550px) {
+  .profile__info-button {
+    margin: 7px 0 0 10px;
+    width: 18px;
+    height: 18px;
+  }
+}

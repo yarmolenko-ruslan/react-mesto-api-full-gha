@@ -1,0 +1,22 @@
+.elements__list {
+  display: grid;
+  grid-template-rows: 361px 361px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px 17px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 940px) {
+  .elements__list {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+}
+
+@media (max-width: 550px) {
+  .elements__list {
+    grid-template-columns: 100%;
+  }
+}
