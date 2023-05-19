@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const { PORT = 3000, JWT_SECRET = 'super-secret-key' } = process.env;
+const { PORT = 3000, JWT_SECRET = 'avada-kedavra' } = process.env;
 
 const MONGOOSE_URL = 'mongodb://localhost:27017/mestodb';
 const JWT_STORAGE_TIME = '7d';

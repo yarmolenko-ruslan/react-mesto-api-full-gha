@@ -1,7 +1,8 @@
 const allowedCors = [
-  'https://mesto.rus.nomoredomains.monster/',
-  'http://mesto.rus.nomoredomains.monster/',
-  'localhost:3000',
+  'https://mesto.rus.nomoredomains.monster',
+  'http://mesto.rus.nomoredomains.monster',
+  'http://localhost:3000',
+  'https://localhost:3000',
 ];
 
 const cors = (req, res, next) => {

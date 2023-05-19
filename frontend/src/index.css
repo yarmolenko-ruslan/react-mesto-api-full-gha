@@ -65,6 +65,7 @@
 @import url(./blocks/element/__like/_active/element__like_active.css);
 @import url(./blocks/element/__like-container/element__like-container.css);
 @import url(./blocks/element/__like-quantity/element__like-quantity.css);
+@import url(./blocks/element/__trash-btn/__trush-btn_hidden/element__thush-btn_hidden.css);
 
 /* import footer */
 

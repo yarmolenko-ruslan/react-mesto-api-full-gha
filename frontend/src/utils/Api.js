@@ -4,6 +4,15 @@ class Api {
     this.headers = options.headers;
   }
 
+  _getHeaders() {
+    let currentHeaders = this.headers;
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      currentHeaders["Authorization"] = `Bearer ${jwt}`;
+    }
+    return currentHeaders;
+  }
+
   _checkResponse(res) {
     if (res.ok) {
       return res.json();
@@ -13,7 +22,7 @@ class Api {
 
   _executeGetRequest(path) {
     return fetch(this.baseUrl + path, {
-      headers: this.headers,
+      headers: this._getHeaders(),
     }).then(this._checkResponse);
   }
 
@@ -28,7 +37,7 @@ class Api {
   _executePatchRequest(path, data) {
     return fetch(this.baseUrl + path, {
       method: "PATCH",
-      headers: this.headers,
+      headers: this._getHeaders(),
       body: JSON.stringify(data),
     }).then(this._checkResponse);
   }
@@ -55,7 +64,7 @@ class Api {
   _executeDeleteRequest(path) {
     return fetch(this.baseUrl + path, {
       method: "DELETE",
-      headers: this.headers,
+      headers: this._getHeaders(),
     }).then(this._checkResponse);
   }
 
@@ -108,7 +117,7 @@ class Api {
 }
 
 export const api = new Api({
-  baseUrl: "https://api.mesto.rus.nomoredomains.monster/",
+  baseUrl: "https://api.mesto.rus.nomoredomains.monster",
   headers: {
     "Content-Type": "application/json",
   },
@@ -117,7 +126,7 @@ export const api = new Api({
 export default api;
 
 export const auth = new Api({
-  baseUrl: "https://api.mesto.rus.nomoredomains.monster/",
+  baseUrl: "https://api.mesto.rus.nomoredomains.monster",
   headers: {
     "Content-Type": "application/json",
   },

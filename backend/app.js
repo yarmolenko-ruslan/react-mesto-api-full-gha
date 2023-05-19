@@ -1,4 +1,5 @@
 const express = require('express');
+
 const app = express();
 
 const bodyParser = require('body-parser');
@@ -19,7 +20,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
 
-app.use( cors);
+app.use(cors);
 
 app.get('/crash-test', () => {
   setTimeout(() => {
@@ -35,7 +36,7 @@ app.post(
       password: Joi.string().required(),
     }),
   }),
-  login
+  login,
 );
 
 app.post(
@@ -47,11 +48,11 @@ app.post(
       name: Joi.string().min(2).max(30),
       about: Joi.string().min(2).max(30),
       avatar: Joi.string().pattern(
-        /https?:\/\/(www\.)?([\w-]+\.)+\w+[\w\-._~:/?#[\]@!$&'()*,;=]*/
+        /https?:\/\/(www\.)?([\w-]+\.)+\w+[\w\-._~:/?#[\]@!$&'()*,;=]*/,
       ),
     }),
   }),
-  createUser
+  createUser,
 );
 
 app.use(auth);

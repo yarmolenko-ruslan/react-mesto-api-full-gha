@@ -1,4 +1,4 @@
-import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { CurrentUserContext } from "../context/CurrentUserContext.js";
 import { api, auth } from "../utils/Api";
@@ -11,11 +11,11 @@ import AddPlacePopup from "./AddPlacePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import EditProfilePopup from "./EditProfilePopup";
 import ImagePopup from "./ImagePopup";
+import InfoTooltip from "./InfoTooltip";
 
 import Login from "./Login";
 import Register from "./Register";
 import ProtectedRoute from "./ProtectedRoute";
-import InfoTooltip from "./InfoTooltip";
 
 function App() {
   const [cards, setCards] = useState([]);
@@ -52,7 +52,7 @@ function App() {
     auth
       .signIn({ password: password, email: email })
       .then((data) => {
-        localStorage.setItem("jwt", data.token);
+        localStorage.setItem("jwt", data.jwt);
         setEmail(email);
         setLoggedIn(true);
         navigate("/");
@@ -88,12 +88,11 @@ function App() {
 
   function tokenCheck() {
     const jwt = localStorage.getItem("jwt");
-
     if (jwt) {
       auth
         .getUserAuth(jwt)
         .then((data) => {
-          setEmail(data.data.email);
+          setEmail(data.email);
           setLoggedIn(true);
         })
         .then(() => navigate("/"))
@@ -139,8 +138,8 @@ function App() {
   function handleUpdateAvatar({ avatar }) {
     api
       .patchUserAvatar({ avatar: avatar })
-      .then((userData) => {
-        setCurrentUser(userData);
+      .then((data) => {
+        setCurrentUser(data.data);
         closeAllPopups();
       })
       .catch(console.error);
@@ -149,11 +148,11 @@ function App() {
   function handleUpdateCard({ name, link }) {
     api
       .postCard({ name: name, link: link })
-      .then((newCard) => {
-        setCards([newCard, ...cards]);
+      .then((data) => {
+        setCards([data.data, ...cards]);
         closeAllPopups();
       })
-      .catch(console.error);
+      .catch((err) => console.error(err));
   }
 
   useEffect(() => {
@@ -161,7 +160,7 @@ function App() {
       api
         .getInitialCards()
         .then((data) => {
-          setCards(data);
+          setCards(data.data);
         })
         .catch((err) => console.error(err));
     }
@@ -196,22 +195,22 @@ function App() {
   };
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     if (isLiked) {
       api
         .deleteLikes(card._id, !isLiked)
-        .then((newCard) => {
-          setNewCards(card._id, newCard);
+        .then((data) => {
+          setNewCards(card._id, data.data);
         })
-        .catch(console.error);
+        .catch((err) => console.error(err));
     } else {
       api
         .putLikes(card._id, isLiked)
-        .then((newCard) => {
-          setNewCards(card._id, newCard);
+        .then((data) => {
+          setNewCards(card._id, data.data);
         })
-        .catch(console.error);
+        .catch((err) => console.error(err));
     }
   }
 
@@ -228,7 +227,7 @@ function App() {
         <Header email={email} exit={signOut} loggedIn={loggedIn} />
 
         <Routes>
-          <Route path="/mesto-react" element={<Navigate to="/" replace />} />
+          {/* <Route path="/mesto-react" element={<Navigate to="/" replace />} /> */}
           <Route
             path="/sign-up"
             element={<Register onRegister={onRegister} />}

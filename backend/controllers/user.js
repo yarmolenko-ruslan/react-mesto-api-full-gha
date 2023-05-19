@@ -12,19 +12,19 @@ const { CREATED, OK } = require('../utils/successes');
 
 // функция создания пользователя
 const createUser = (req, res, next) => {
-  const { name, about, avatar, email, password } = req.body;
+  const {
+    name, about, avatar, email, password,
+  } = req.body;
 
   bcrypt
     .hash(password, SALT_LENGTH)
-    .then((hash) =>
-      User.create({
-        name,
-        about,
-        avatar,
-        email,
-        password: hash,
-      })
-    )
+    .then((hash) => User.create({
+      name,
+      about,
+      avatar,
+      email,
+      password: hash,
+    }))
     .then((user) => User.findOne({ _id: user._id }))
     .then((user) => res.status(CREATED).send({ data: user }))
     .catch((err) => errorMessage(err, req, res, next));
@@ -63,7 +63,7 @@ const updateProfile = (req, res, next) => {
   User.findByIdAndUpdate(
     userId,
     { name, about },
-    { new: true, runValidators: true }
+    { new: true, runValidators: true },
   )
     .orFail(() => {
       throw new NOT_FOUND_ERROR('Пользователь с таким id не найден');

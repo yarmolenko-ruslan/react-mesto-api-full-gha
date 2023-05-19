@@ -3,10 +3,13 @@ import { CurrentUserContext } from "../context/CurrentUserContext.js";
 
 function Card({ card, onCardClick, onCardLike, onCardDelete }) {
   const currentUser = React.useContext(CurrentUserContext);
-  const isOwner = card.owner._id === currentUser._id;
-  const isLiked = card.likes.some((i) => i._id === currentUser._id);
+  const isOwner = card.owner === currentUser._id;
+  const cardDeleteButtonClassName = `element__trash-btn button ${
+    isOwner ? "" : "element__trush-btn_hidden"
+  }`;
+  const isLiked = card.likes.some((i) => i === currentUser._id);
   const cardLikeButtonClassName = `element__like button ${
-    isLiked && "element__like_active"
+    isLiked ? "element__like_active" : ""
   }`;
 
   const handleCardClick = () => {
@@ -25,7 +28,7 @@ function Card({ card, onCardClick, onCardLike, onCardDelete }) {
     <li className="element">
       {isOwner && (
         <button
-          className="element__trash-btn button"
+          className={cardDeleteButtonClassName}
           aria-label="Удалить карточку"
           type="button"
           onClick={handleCardDelet}
