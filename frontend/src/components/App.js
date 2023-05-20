@@ -58,6 +58,7 @@ function App() {
         navigate("/");
       })
       .catch((err) => {
+        setToolTipSuccess(false);
         setToolTipVisible(true);
         setToolTipText("Что-то пошло не так! Попробуйте ещё раз.");
         console.log(err);
